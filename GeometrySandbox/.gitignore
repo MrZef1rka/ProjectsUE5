@@ -1,22 +1,10 @@
 # Unreal Engine generated files
+.vs/
+*.sln
 Binaries/
 DerivedDataCache/
 Intermediate/
+Content/StarterContent/
 Saved/
-Content/
-Plugins/
-Build/
-*.suo
-*.sln
-*.opensdf
-*.sdf
-*.VC.db
-*.VC.opendb
-
-# Visual Studio
-.vs/
-x64/
-*.VC.db
-
 # Rider
 .idea/

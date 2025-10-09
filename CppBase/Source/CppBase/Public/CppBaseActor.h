@@ -7,21 +7,7 @@
 class UStaticMeshComponent;
 
 UENUM(BlueprintType)
-enum class EMovementState : uint8 { Mobility, Static };
-
-USTRUCT(BlueprintType)
-struct FTransformStruct {
-  GENERATED_USTRUCT_BODY()
-
-  UPROPERTY(EditAnywhere, BlueprintReadWrite)
-  FVector CurrentLocation = FVector::ZeroVector;
-
-  UPROPERTY(EditAnywhere, BlueprintReadWrite)
-  FRotator CurrentRotation = FRotator::ZeroRotator;
-
-  UPROPERTY(EditAnywhere, BlueprintReadWrite)
-  FVector CurrentScale = FVector(1.0f, 1.0f, 1.0f);
-};
+enum class EMovementState : uint8 { Sin, Static };
 
 UCLASS()
 class CPPBASE_API ACppBaseActor : public AActor {
@@ -38,17 +24,23 @@ protected:
   // Called when the game starts or when spawned
   virtual void BeginPlay() override;
 
-  UFUNCTION(BlueprintCallable)
-  void ShowInformation();
+	UFUNCTION(BlueprintCallable)
+	void ShowInformation();
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	EMovementState MoveType = EMovementState::Sin;
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float Amplitude = 50.0f;
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float Frequency = 2.0f;
 
 public:
   // Called every frame
   virtual void Tick(float DeltaTime) override;
 
 private:
-  UPROPERTY(EditAnywhere)
-  int32 EnemyCount;
-
-  UPROPERTY(EditAnywhere)
-  bool bIsAlive;
+	FVector InitialLocation;	
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+	void SinMovement();
 };
+
